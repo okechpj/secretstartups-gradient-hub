@@ -19,6 +19,12 @@ export default {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        brand: {
+          orange: "hsl(var(--brand-orange))",
+          pink: "hsl(var(--brand-pink))",
+          purple: "hsl(var(--brand-purple))",
+          "deep-purple": "hsl(var(--brand-deep-purple))",
+        },
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
