@@ -22,6 +22,12 @@ All colors MUST be HSL.
     --brand-pink: 330 85% 65%;
     --brand-purple: 280 80% 65%;
     --brand-deep-purple: 270 75% 55%;
+    
+    /* Atlassian-inspired bright colors */
+    --bright-blue: 214 84% 56%;
+    --bright-green: 142 71% 45%;
+    --bright-yellow: 45 93% 58%;
+    --bright-teal: 171 82% 44%;
 
     --primary: 20 95% 60%;
     --primary-foreground: 0 0% 100%;
@@ -171,6 +177,37 @@ All colors MUST be HSL.
     background-image: radial-gradient(circle at 20% 50%, hsl(var(--brand-orange) / 0.3) 0%, transparent 50%),
                       radial-gradient(circle at 80% 20%, hsl(var(--brand-pink) / 0.3) 0%, transparent 50%),
                       radial-gradient(circle at 40% 80%, hsl(var(--brand-purple) / 0.3) 0%, transparent 50%);
+  }
+
+  .geometric-pattern {
+    background-image: 
+      radial-gradient(circle at 15% 25%, hsl(var(--bright-blue) / 0.15) 0%, transparent 40%),
+      radial-gradient(circle at 85% 15%, hsl(var(--bright-green) / 0.15) 0%, transparent 40%),
+      radial-gradient(circle at 70% 85%, hsl(var(--bright-yellow) / 0.15) 0%, transparent 40%),
+      radial-gradient(circle at 25% 75%, hsl(var(--brand-purple) / 0.15) 0%, transparent 40%);
+  }
+
+  .geometric-shapes::before {
+    content: '';
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    width: 80px;
+    height: 80px;
+    background: hsl(var(--bright-blue) / 0.2);
+    border-radius: 50%;
+    transform: rotate(45deg);
+  }
+
+  .geometric-shapes::after {
+    content: '';
+    position: absolute;
+    bottom: 20%;
+    right: 15%;
+    width: 60px;
+    height: 60px;
+    background: hsl(var(--bright-green) / 0.2);
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
   }
 
   .hero-title {

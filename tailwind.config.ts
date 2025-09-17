@@ -25,6 +25,12 @@ export default {
           purple: "hsl(var(--brand-purple))",
           "deep-purple": "hsl(var(--brand-deep-purple))",
         },
+        bright: {
+          blue: "hsl(var(--bright-blue))",
+          green: "hsl(var(--bright-green))",
+          yellow: "hsl(var(--bright-yellow))",
+          teal: "hsl(var(--bright-teal))",
+        },
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",

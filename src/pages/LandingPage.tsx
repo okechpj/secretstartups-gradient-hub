@@ -6,7 +6,7 @@ import RoadmapSection from "@/components/RoadmapSection";
 import MissionContactSection from "@/components/MissionContactSection";
 import NewFooter from "@/components/NewFooter";
 
-const Index = () => {
+const LandingPage = () => {
   return (
     <div className="min-h-screen">
       <Navigation />
@@ -22,4 +22,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default LandingPage;
