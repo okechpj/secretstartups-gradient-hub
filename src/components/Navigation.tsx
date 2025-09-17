@@ -32,9 +32,14 @@ const Navigation = () => {
               {item.label}
             </a>
           ))}
-          <Button variant="hero" size="lg">
-            Join the Community
-          </Button>
+          <div className="flex items-center space-x-3">
+            <Button variant="outline" size="lg" asChild>
+              <a href="/signin">Sign In</a>
+            </Button>
+            <Button variant="hero" size="lg" asChild>
+              <a href="/signup">Join Community</a>
+            </Button>
+          </div>
         </div>
 
         {/* Mobile Menu Button */}
@@ -59,9 +64,14 @@ const Navigation = () => {
                   {item.label}
                 </a>
               ))}
-              <Button variant="hero" className="w-full">
-                Join the Community
-              </Button>
+              <div className="flex flex-col space-y-2">
+                <Button variant="outline" className="w-full" asChild>
+                  <a href="/signin">Sign In</a>
+                </Button>
+                <Button variant="hero" className="w-full" asChild>
+                  <a href="/signup">Join Community</a>
+                </Button>
+              </div>
             </div>
           </div>
         )}
