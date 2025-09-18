@@ -1,19 +1,30 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { Github, Linkedin } from "lucide-react";
+import { Github, Linkedin, Chrome } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import NewFooter from "@/components/NewFooter";
-import { Link } from "react-router-dom";
+import { useAuth } from "@/hooks/useAuth";
 
 const Signin = () => {
+  const navigate = useNavigate();
+  const { signIn, signInWithProvider, user, loading } = useAuth();
   const [formData, setFormData] = useState({
     email: "",
     password: ""
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Redirect if already logged in
+  useEffect(() => {
+    if (user && !loading) {
+      navigate('/profile');
+    }
+  }, [user, loading, navigate]);
 
   return (
     <div className="min-h-screen bg-background">

@@ -1,19 +1,33 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Progress } from "@/components/ui/progress";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { ChevronLeft, ChevronRight, Upload, X } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { ArrowLeft, ArrowRight, Github, Linkedin, Chrome, Upload, X, ChevronLeft, ChevronRight } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import NewFooter from "@/components/NewFooter";
-import { Link } from "react-router-dom";
+import { useAuth } from "@/hooks/useAuth";
+import { useProfile } from "@/hooks/useProfile";
 
 const Signup = () => {
+  const navigate = useNavigate();
+  const { signUp, user, loading } = useAuth();
+  const { updateProfile } = useProfile();
   const [currentStep, setCurrentStep] = useState(1);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const totalSteps = 4;
+
+  // Redirect if already logged in
+  useEffect(() => {
+    if (user && !loading) {
+      navigate('/profile');
+    }
+  }, [user, loading, navigate]);
   const progress = (currentStep / totalSteps) * 100;
 
   const [formData, setFormData] = useState({
@@ -42,6 +56,8 @@ const Signup = () => {
   const handleNext = () => {
     if (currentStep < totalSteps) {
       setCurrentStep(currentStep + 1);
+    } else {
+      handleSignup();
     }
   };
 
@@ -54,7 +70,42 @@ const Signup = () => {
   const handleSkip = () => {
     if (currentStep < totalSteps) {
       setCurrentStep(currentStep + 1);
+    } else {
+      handleSignup();
     }
+  };
+
+  const handleSignup = async () => {
+    if (!formData.firstName || !formData.lastName || !formData.email || !formData.password) {
+      return;
+    }
+
+    setIsSubmitting(true);
+    
+    const { error } = await signUp(formData.email, formData.password, {
+      first_name: formData.firstName,
+      last_name: formData.lastName
+    });
+
+    if (!error) {
+      // Store additional profile data for later update
+      localStorage.setItem('pendingProfileData', JSON.stringify({
+        location: formData.location,
+        phone: formData.phone,
+        preferred_language: formData.language,
+        education: formData.education,
+        work_info: formData.workInfo,
+        projects: formData.projects,
+        skills: formData.skills,
+        expertise_level: formData.expertiseLevel,
+        interests: formData.interests,
+        github_url: formData.socialLinks.github,
+        linkedin_url: formData.socialLinks.linkedin,
+        twitter_url: formData.socialLinks.twitter
+      }));
+    }
+    
+    setIsSubmitting(false);
   };
 
   const addInterest = () => {

@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+import { Link } from "react-router-dom";
+import { useAuth } from "@/hooks/useAuth";
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user, signOut } = useAuth();
 
   const navItems = [
     { label: "About", href: "#about" },
@@ -32,13 +35,38 @@ const Navigation = () => {
               {item.label}
             </a>
           ))}
-          <div className="flex items-center space-x-3">
-            <Button variant="outline" size="lg" asChild>
-              <a href="/signin">Sign In</a>
-            </Button>
-            <Button variant="hero" size="lg" asChild>
-              <a href="/signup">Join Community</a>
-            </Button>
+          
+          {/* Auth Links */}
+          <div className="hidden md:flex items-center space-x-4">
+            {user ? (
+              <>
+                <Link to="/profile">
+                  <Button variant="ghost" className="text-foreground hover:text-bright-blue">
+                    Profile
+                  </Button>
+                </Link>
+                <Button 
+                  variant="ghost" 
+                  className="text-foreground hover:text-bright-blue"
+                  onClick={signOut}
+                >
+                  Sign Out
+                </Button>
+              </>
+            ) : (
+              <>
+                <Link to="/signin">
+                  <Button variant="ghost" className="text-foreground hover:text-bright-blue">
+                    Sign In
+                  </Button>
+                </Link>
+                <Link to="/signup">
+                  <Button className="bg-bright-blue hover:bg-bright-blue/90 text-white rounded-xl">
+                    Join Community
+                  </Button>
+                </Link>
+              </>
+            )}
           </div>
         </div>
 
@@ -64,13 +92,38 @@ const Navigation = () => {
                   {item.label}
                 </a>
               ))}
-              <div className="flex flex-col space-y-2">
-                <Button variant="outline" className="w-full" asChild>
-                  <a href="/signin">Sign In</a>
-                </Button>
-                <Button variant="hero" className="w-full" asChild>
-                  <a href="/signup">Join Community</a>
-                </Button>
+              
+              {/* Mobile Auth Links */}
+              <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
+                {user ? (
+                  <>
+                    <Link to="/profile" className="block">
+                      <Button variant="ghost" className="w-full justify-start text-foreground hover:text-bright-blue mb-2">
+                        Profile
+                      </Button>
+                    </Link>
+                    <Button 
+                      variant="ghost" 
+                      className="w-full justify-start text-foreground hover:text-bright-blue"
+                      onClick={signOut}
+                    >
+                      Sign Out
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    <Link to="/signin" className="block">
+                      <Button variant="ghost" className="w-full justify-start text-foreground hover:text-bright-blue mb-2">
+                        Sign In
+                      </Button>
+                    </Link>
+                    <Link to="/signup" className="block">
+                      <Button className="w-full bg-bright-blue hover:bg-bright-blue/90 text-white rounded-xl">
+                        Join Community
+                      </Button>
+                    </Link>
+                  </>
+                )}
               </div>
             </div>
           </div>

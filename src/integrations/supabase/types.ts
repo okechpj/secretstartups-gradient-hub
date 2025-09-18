@@ -14,7 +14,75 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          education: string | null
+          expertise_level: string | null
+          first_name: string | null
+          github_url: string | null
+          id: string
+          interests: string[] | null
+          last_name: string | null
+          linkedin_url: string | null
+          location: string | null
+          phone: string | null
+          preferred_language: string | null
+          profile_completion: number | null
+          projects: string | null
+          skills: string | null
+          twitter_url: string | null
+          updated_at: string
+          user_id: string
+          work_info: string | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          education?: string | null
+          expertise_level?: string | null
+          first_name?: string | null
+          github_url?: string | null
+          id?: string
+          interests?: string[] | null
+          last_name?: string | null
+          linkedin_url?: string | null
+          location?: string | null
+          phone?: string | null
+          preferred_language?: string | null
+          profile_completion?: number | null
+          projects?: string | null
+          skills?: string | null
+          twitter_url?: string | null
+          updated_at?: string
+          user_id: string
+          work_info?: string | null
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          education?: string | null
+          expertise_level?: string | null
+          first_name?: string | null
+          github_url?: string | null
+          id?: string
+          interests?: string[] | null
+          last_name?: string | null
+          linkedin_url?: string | null
+          location?: string | null
+          phone?: string | null
+          preferred_language?: string | null
+          profile_completion?: number | null
+          projects?: string | null
+          skills?: string | null
+          twitter_url?: string | null
+          updated_at?: string
+          user_id?: string
+          work_info?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
